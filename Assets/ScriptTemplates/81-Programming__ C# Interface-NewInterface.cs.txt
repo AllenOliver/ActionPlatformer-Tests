@@ -1,0 +1,7 @@
+﻿///<summary>
+/// Document interface #SCRIPTNAME#
+///</summary>
+public interface #SCRIPTNAME#
+{
+    #NOTRIM#
+}

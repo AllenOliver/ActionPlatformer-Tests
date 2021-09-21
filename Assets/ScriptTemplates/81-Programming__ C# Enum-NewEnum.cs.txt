@@ -1,0 +1,7 @@
+///<summary>
+/// Document enum #SCRIPTNAME#
+///</summary>
+public enum #SCRIPTNAME#
+{
+    #NOTRIM#
+}
