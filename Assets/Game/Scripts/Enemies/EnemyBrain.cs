@@ -10,17 +10,18 @@ public class EnemyBrain : MonoBehaviour
     public CircleCollider2D HitCollider;
     public Rigidbody2D PhysicsBody;
     public ParticleSystem HitParticles;
+    public EnemyStats EnemyStats;
 
     // Start is called before the first frame update
     private void Start()
     {
         AssignComponents();
-    }
 
-    // Update is called once per frame
-    //private void Update()
-    //{
-    //}
+        if (EnemyStats)
+        {
+            Health.MaxHealth = EnemyStats.MaxHealth;
+        }
+    }
 
     [Button(ButtonSizes.Medium)]
     private void SetupEnemy()
@@ -31,7 +32,10 @@ public class EnemyBrain : MonoBehaviour
         if (!gameObject.GetComponent<Rigidbody2D>()) gameObject.AddComponent<Rigidbody2D>();
         if (!gameObject.GetComponent<CircleCollider2D>()) gameObject.AddComponent<CircleCollider2D>();
         AssignComponents();
-
+        if (EnemyStats)
+        {
+            Health.MaxHealth = EnemyStats.MaxHealth;
+        }
         HitCollider.isTrigger = true;
     }
 
@@ -48,6 +52,7 @@ public class EnemyBrain : MonoBehaviour
     {
         if (collision.CompareTag("PlayerWeapon"))
         {
+            HitParticles.Play();
             Health.TakeDamage();
         }
     }

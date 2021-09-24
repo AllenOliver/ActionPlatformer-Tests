@@ -11,10 +11,7 @@ public class EnemyHealth : MonoBehaviour
     private bool hasBeenHit;
 
     [Button(ButtonSizes.Small)]
-    public void ResetHealth()
-    {
-        CurrentHealth = MaxHealth;
-    }
+    public void ResetHealth() => CurrentHealth = MaxHealth;
 
     public void TakeDamage()
     {
@@ -22,14 +19,8 @@ public class EnemyHealth : MonoBehaviour
         {
             hasBeenHit = true;
             CurrentHealth--;
-            if (CurrentHealth <= 0)
-            {
-                Die();
-            }
-            else
-            {
-                StartCoroutine(TakeHit(.15f));
-            }
+            if (CurrentHealth <= 0) Die();
+            else StartCoroutine(TakeHit(.15f));
         }
     }
 
@@ -40,7 +31,6 @@ public class EnemyHealth : MonoBehaviour
     }
 
     private void Die()
-
     {
         RippleManager.instance.Ripple(RippleTypes.RED_BURST, Camera.main.WorldToViewportPoint(transform.position));
 

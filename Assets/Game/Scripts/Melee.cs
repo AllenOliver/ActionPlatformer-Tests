@@ -21,16 +21,19 @@ public class Melee : MonoBehaviour
         _currentMovement = GetComponent<Movement>();
         _weaponSprite_Front = Weapon_Front.GetComponent<SpriteRenderer>();
         _weaponSprite_Back = Weapon_Back.GetComponent<SpriteRenderer>();
-        Weapon_Front.SetActive(false);
-        Weapon_Back.SetActive(false);
+        Weapon_Front.Off();
+        Weapon_Back.Off();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown("Attack"))
+        if (!GameModeBase.instance.IsPaused)
         {
-            Attack();
+            if (Input.GetButtonDown("Attack"))
+            {
+                Attack();
+            }
         }
     }
 
@@ -42,11 +45,11 @@ public class Melee : MonoBehaviour
 
             if (_currentMovement.side == 1)
             {
-                Weapon_Front.SetActive(true);
+                Weapon_Front.On();
             }
             else
             {
-                Weapon_Back.SetActive(true);
+                Weapon_Back.On();
             }
 
             Debug.Log("Attacking");
@@ -57,8 +60,8 @@ public class Melee : MonoBehaviour
     private IEnumerator AttackDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Weapon_Front.SetActive(false);
-        Weapon_Back.SetActive(false);
+        Weapon_Front.Off();
+        Weapon_Back.Off();
         _canAttack = true;
     }
 
